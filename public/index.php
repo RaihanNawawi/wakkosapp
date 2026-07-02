@@ -1,3 +1,8 @@
 <?php
 
-require_once "app/init.php";
+require_once "../app/init.php";
+
+$app = new App();
+$controller = new Controller();
+$database = new Database();
+$config = new Config();
