@@ -1,6 +1,2 @@
 <?php
-class Config {
-    public function __construct() {
-        echo "Config has been initialized. <hr>";
-    }
-}
+const APP_ROOT = '../app';
