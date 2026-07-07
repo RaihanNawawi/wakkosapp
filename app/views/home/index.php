@@ -1,3 +1,5 @@
+<!-- Menghilangkan warning red dari PHPIntellisense -->
+<?php /** @var array $data */ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,6 +8,6 @@
     <title>Homepage</title>
 </head>
 <body>
-    <h1>Welcome to Wakkos Homepage</h1>
+    <h1>Welcome to Wakkos <?= $data['nama'] ?></h1>
 </body>
 </html>
