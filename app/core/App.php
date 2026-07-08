@@ -25,7 +25,7 @@ class App
             $this->controller = ucfirst(strtolower($url[0])); // Standarisasi nama controller agar sesuai dengan nama file controller yang dipanggil
             unset($url[0]);
         } else {
-            $this->show404();
+            Response::notFound();
         }
         require_once APP_ROOT . '/controllers/' . $this->controller . '.php';
         $this->controller = new $this->controller;
@@ -35,19 +35,19 @@ class App
 
             // Method harus ada
             if (!method_exists($this->controller, $url[1])) {
-                $this->show404();
+                Response::notFound();
             }
 
             // Tidak boleh mengakses magic method (__construct, __destruct, dll)
             if (str_starts_with($url[1], '__')) {
-                $this->show404();
+                Response::notFound();
             }
 
             // Method harus bersifat public
             $reflection = new ReflectionMethod($this->controller, $url[1]);
 
             if (!$reflection->isPublic()) {
-                $this->show404();
+                Response::notFound();
             }
 
             $this->method = $url[1];
@@ -63,10 +63,5 @@ class App
         call_user_func_array([$this->controller, $this->method], $this->params);
     }
 
-    protected function show404()
-    {
-        http_response_code(404);
-        require_once APP_ROOT . '/views/errors/404.php';
-        exit;
-    }
+
 }
